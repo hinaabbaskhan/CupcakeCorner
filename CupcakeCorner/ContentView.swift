@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+struct Response: Codable {
+    var results: [Result]
+}
 
 
 struct ContentView: View {
