@@ -18,8 +18,6 @@ struct Result: Codable {
 
 struct ContentView: View {
     @State private var results = [Result]()
-    
-    
 
     var body: some View {
         List(results, id: \.trackId) { item in
@@ -42,15 +40,13 @@ struct ContentView: View {
         
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
-
-            // more code to come
+            if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
+                results = decodedResponse.results
+            }
         } catch {
             print("Invalid data")
         }
         
-        if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
-            results = decodedResponse.results
-        }
     }
 }
 
