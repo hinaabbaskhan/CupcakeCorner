@@ -21,7 +21,7 @@ struct ContentView: View {
 
     var body: some View {
         VStack{
-            AsyncImage(url: URL(string: "https://hws.dev/img/logo.png"))
+            AsyncImage(url: URL(string: "https://hws.dev/img/logo.png"), scale: 3)
         }
     }
     
