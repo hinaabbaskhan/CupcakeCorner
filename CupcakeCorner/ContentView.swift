@@ -20,15 +20,8 @@ struct ContentView: View {
     @State private var results = [Result]()
 
     var body: some View {
-        List(results, id: \.trackId) { item in
-            VStack(alignment: .leading) {
-                Text(item.trackName)
-                    .font(.headline)
-                Text(item.collectionName)
-            }
-        }
-        .task {
-            await loadData()
+        VStack{
+            AsyncImage(url: URL(string: "https://hws.dev/img/logo.png"))
         }
     }
     
