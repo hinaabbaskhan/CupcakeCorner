@@ -21,7 +21,14 @@ struct ContentView: View {
 
     var body: some View {
         VStack{
-            AsyncImage(url: URL(string: "https://hws.dev/img/logo.png"), scale: 3)
+            AsyncImage(url: URL(string: "https://hws.dev/img/logo.png")) { image in
+                image
+                    .resizable()
+                    .scaledToFit()
+            } placeholder: {
+                Color.red
+            }
+            .frame(width: 200, height: 200)//            List(results, id: \.trackId) { item in
         }
     }
     
