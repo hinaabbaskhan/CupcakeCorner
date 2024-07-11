@@ -16,9 +16,17 @@ class User: Codable {
     var name = "Taylor"
 }
 
+
 struct ContentView: View {
+    @State private var counter = 0
+
     var body: some View {
-        Button("Encode Taylor", action: encodeTaylor)
+        VStack{
+            Button("Encode Taylor", action: encodeTaylor)
+            Button("Tap Count: \(counter)") {
+                counter += 1
+            }
+        }
     }
 
     func encodeTaylor() {
