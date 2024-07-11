@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreHaptics
 @Observable
 class User: Codable {
     enum CodingKeys: String, CodingKey {
@@ -19,6 +20,7 @@ class User: Codable {
 
 struct ContentView: View {
     @State private var counter = 0
+    @State private var engine: CHHapticEngine?
 
     var body: some View {
         VStack{
@@ -26,6 +28,16 @@ struct ContentView: View {
             Button("Tap Count: \(counter)") {
                 counter += 1
             }.sensoryFeedback(.impact(weight: .heavy, intensity: 1), trigger: counter)
+    func prepareHaptics() {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+
+        do {
+            engine = try CHHapticEngine()
+            try engine?.start()
+        } catch {
+            print("There was an error creating the engine: \(error.localizedDescription)")
+        }
+    }
         }
     }
 
