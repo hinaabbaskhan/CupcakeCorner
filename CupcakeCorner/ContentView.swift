@@ -25,7 +25,7 @@ struct ContentView: View {
             Button("Encode Taylor", action: encodeTaylor)
             Button("Tap Count: \(counter)") {
                 counter += 1
-            }.sensoryFeedback(.increase, trigger: counter)
+            }.sensoryFeedback(.impact(flexibility: .soft, intensity: 0.5), trigger: counter)
         }
     }
 
