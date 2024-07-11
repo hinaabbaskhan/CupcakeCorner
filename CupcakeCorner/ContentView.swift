@@ -28,6 +28,10 @@ struct ContentView: View {
             Button("Tap Count: \(counter)") {
                 counter += 1
             }.sensoryFeedback(.impact(weight: .heavy, intensity: 1), trigger: counter)
+            Button("Tap Me", action: complexSuccess)
+                .onAppear(perform: prepareHaptics)
+        }
+    }
     func prepareHaptics() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
 
