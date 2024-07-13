@@ -21,6 +21,7 @@ class User: Codable {
 struct ContentView: View {
     @State private var counter = 0
     @State private var engine: CHHapticEngine?
+    @State private var order = Order()
 
     var body: some View {
         VStack{
@@ -30,6 +31,20 @@ struct ContentView: View {
             }.sensoryFeedback(.impact(weight: .heavy, intensity: 1), trigger: counter)
             Button("Tap Me", action: complexSuccess)
                 .onAppear(perform: prepareHaptics)
+            NavigationStack {
+                Form {
+                    Section {
+                        Picker("Select your cake type", selection: $order.type) {
+                            ForEach(Order.types.indices, id: \.self) {
+                                Text(Order.types[$0])
+                            }
+                        }
+
+                        Stepper("Number of cakes: \(order.quantity)", value: $order.quantity, in: 3...20)
+                    }
+                }
+                .navigationTitle("Cupcake Corner")
+            }
         }
     }
     func prepareHaptics() {
