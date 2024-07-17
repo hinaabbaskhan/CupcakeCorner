@@ -25,8 +25,12 @@ struct CheckoutView: View {
                 Text("Your total is \(order.cost, format: .currency(code: "USD"))")
                     .font(.title)
 
-                Button("Place Order", action: { })
-                    .padding()
+               
+                Button("Place Order") {
+                    Task {
+                        await placeOrder()
+                    }
+                }
             }
         }
         .navigationTitle("Check out")
