@@ -25,12 +25,6 @@ struct ContentView: View {
 
     var body: some View {
         VStack{
-            Button("Encode Taylor", action: encodeTaylor)
-            Button("Tap Count: \(counter)") {
-                counter += 1
-            }.sensoryFeedback(.impact(weight: .heavy, intensity: 1), trigger: counter)
-            Button("Tap Me", action: complexSuccess)
-                .onAppear(perform: prepareHaptics)
             NavigationStack {
                 Form {
                     Section {
@@ -42,23 +36,24 @@ struct ContentView: View {
 
                         Stepper("Number of cakes: \(order.quantity)", value: $order.quantity, in: 3...20)
                     }
+                    
+                    Section {
+                        Toggle("Any special requests?", isOn: $order.specialRequestEnabled)
+
+                        if order.specialRequestEnabled {
+                            Toggle("Add extra frosting", isOn: $order.extraFrosting)
+
+                            Toggle("Add extra sprinkles", isOn: $order.addSprinkles)
+                        }
+                    }
+                    
+                    Section {
+                        NavigationLink("Delivery details") {
+                            AddressView(order: order)
+                        }
+                    }
                 }
                 .navigationTitle("Cupcake Corner")
-            }
-            
-            Section {
-                Toggle("Any special requests?", isOn: $order.specialRequestEnabled)
-
-                if order.specialRequestEnabled {
-                    Toggle("Add extra frosting", isOn: $order.extraFrosting)
-
-                    Toggle("Add extra sprinkles", isOn: $order.addSprinkles)
-                }
-            }
-            Section {
-                NavigationLink("Delivery details") {
-                    AddressView(order: order)
-                }
             }
         }
     }
