@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct AddressView: View {
-    var order: Order
+    @Bindable var order: Order
+
 
     var body: some View {
         Form {
